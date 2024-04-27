@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Imágenes</title>
+</head>
+<body>
+    <form id="formularioImagenes" action="subir_imagenes.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="imagen1"><br>
+        <input type="file" name="imagen2"><br>
+        <input type="file" name="imagen3"><br>
+        <input type="file" name="imagen4"><br>
+        <input type="file" name="imagen5"><br> 
+        <input type="submit" value="Subir Imágenes" name="submit">
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#formularioImagenes").submit(function(event) {
+               // event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+                alert ("hola");
+                var formData = new FormData($(this)[0]);
+
+                $.ajax({
+                    url: $(this).attr("action"),
+                    type: $(this).attr("method"),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log(response); // Puedes mostrar mensajes de éxito o hacer otras acciones aquí
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error); // Manejar errores aquí
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
